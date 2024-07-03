@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres
+    container_name: demo_e_tax_invoice_postgres
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - .docker-info/db:/var/lib/postgresql/data
+    ports:
+      - "2345:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: demo_e_tax_invoice_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - .docker-info/pgadmin:/var/lib/pgadmin
+    ports:
+      - "81:80"
+    depends_on:
+      - postgres
