@@ -30,7 +30,15 @@ public class UserTest {
         User foundUser = userRepository.findById(UserInfo.email).orElseThrow();
         assertEquals(UserInfo.email, foundUser.getEmail());
     }
-
+    @Test
+    public void testUserRepositoryDelete() {
+        User user = User.builder()
+                .email(UserInfo.email)
+                .build();
+        userRepository.save(user);
+        userRepository.deleteById(UserInfo.email);
+        assertEquals(0, userRepository.count());
+    }
     interface UserInfo{
         String name = "John";
         String email = "test@example.com";
