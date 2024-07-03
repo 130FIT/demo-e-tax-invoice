@@ -1,9 +1,6 @@
 package com.application.demo_etax_invoice.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,4 +27,11 @@ public class User  extends BaseEntity{
             columnDefinition = "VARCHAR(100)"
     )
     private String email;
+
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY
+    )
+    private UserVerify userVerify;
 }
