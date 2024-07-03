@@ -27,9 +27,8 @@ public class UserTest {
                 .email(UserInfo.email)
                 .build();
         userRepository.save(user);
-        User foundUser = userRepository.findById("test@example.com").orElse(null);
-        assert foundUser != null;
-        assertEquals("test@example.com", foundUser.getEmail());
+        User foundUser = userRepository.findById(UserInfo.email).orElseThrow();
+        assertEquals(UserInfo.email, foundUser.getEmail());
     }
 
     interface UserInfo{
